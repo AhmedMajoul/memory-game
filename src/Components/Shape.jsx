@@ -3,6 +3,7 @@ import React from 'react';
 import { ReactComponent as Square } from '../shapes/square.svg';
 import { ReactComponent as Circle } from '../shapes/circle.svg';
 import { ReactComponent as Triangle } from '../shapes/triangle.svg';
+import { ReactComponent as Cross } from '../shapes/cross.svg';
 
 const Shape = ({ shape }) => {
     
@@ -15,6 +16,8 @@ const Shape = ({ shape }) => {
                 return <Circle/>
             case "triangle":
                 return <Triangle/>
+                case "star":
+                    return <Cross/>
             default:
                 break;
         }

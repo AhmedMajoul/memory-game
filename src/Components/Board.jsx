@@ -43,9 +43,14 @@ const Board = ({ dataArray }) => {
     //recompter le nombre de dupliqués directement de la table à afficher, par mesure de précaution en cas de changement futur
     const duplicateCount = shuffledArray.reduce((total, { shape }) => ((shape === shuffledArray[0]?.shape) ? total + 1 : total), 0)
 
-    //randomization de la table de datas
+    //randomization de la table de datas et initialisation
     useEffect(() => {
-        setShuffledArray(shuffle(dataArray))
+        setTimer(0);
+        setMoves(0);
+        setFound([]);
+        setSelected([]);
+        setIsPlaying(null);
+        setShuffledArray(shuffle(dataArray));
     }, [dataArray])
 
     //fonction timer
@@ -113,32 +118,28 @@ const Board = ({ dataArray }) => {
 
     return (
         <>
-            <h1 className="page-title w-100 text-center">Matching game</h1>
             <div className="d-flex align-items-start justify-content-between">
-                <span className="title">Moves : {moves}</span>
-                <span className="title">Time {hours} : {minutes} : {seconds}</span>
+                <h3 className="title">Moves : {moves}</h3>
+                <h3 className="title">Time {hours} : {minutes} : {seconds}</h3>
             </div>
-            <Row className="board">
-                {isPlaying === null && <div className="start-overlay position-absolute d-flex align-items-center justify-content-center h-100 w-100">
+            <Row className="board position-relative pb-4 mt-4">
+                {isPlaying === null && <Col className="start-overlay position-absolute d-flex align-items-center justify-content-center h-100">
                     <Button onClick={() => { setIsPlaying(true) }}>
                         START
                     </Button>
-                </div>}
-                {isPlaying === false && <div className="start-overlay position-absolute d-flex align-items-center justify-content-center h-100 w-100">
+                </Col>}
+                {isPlaying === false && <Col className="start-overlay position-absolute d-flex align-items-center justify-content-center h-100">
                     <Button onClick={playAgain}>
                         You Won in :<br />
                         {hours} : {minutes} : {seconds} <br />
                         Play Again?
                     </Button>
-                </div>}
+                </Col>}
                 {shuffledArray.map(({ id, shape }) => (
-                    <Col key={id} className="gy-5 gx-5 d-flex align-items-center justify-content-center" xs="12" sm="6" md="4" lg="3">
+                    <Col key={id} className="gy-4 gx-4 d-flex align-items-center justify-content-center" xs="12" sm="6" md="4" lg="3">
                         <Card isPlaying={isPlaying} id={id} shape={shape} selected={selected} setSelected={setSelected} found={found} duplicateCount={duplicateCount} />
                     </Col>
                 ))}
-            </Row>
-            <Row>
-                <p className="title w-100 pt-5 text-end">By: Ahmed Majoul</p>
             </Row>
         </>
     )
