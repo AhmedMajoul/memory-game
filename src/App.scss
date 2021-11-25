@@ -1,0 +1,108 @@
+.app {
+    background-color: rgb(0, 61, 78);
+    min-height: 100vh;
+    width: 100vw;
+    .container-fluid{
+        padding-left: 30px;
+        padding-right: 30px;
+        max-width: 1440px;
+    }
+    .page-title{
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+    }
+    .title {
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+    }
+    .board {
+        .start-overlay {
+            background-color: rgba(138, 138, 138, 0.973);
+            padding: 100px;
+            z-index: 999;
+            > .btn {
+                height: 300px;
+                width: 300px;
+                font-size: 40px;
+                z-index: 999;
+            }
+        }
+        .memory-card {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        
+            .memory-card-inner {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                transition: transform 0.8s;
+                transform-style: preserve-3d;
+                border-radius: 20px;
+            }
+        
+            &.selected .memory-card-inner {
+                transform: rotateY(180deg);
+            }
+            .memory-card-front,
+            .memory-card-back {
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 20px;
+            }
+            .memory-card-front {
+                background-color: rgb(255, 243, 70);
+                border-radius: 20px;
+                &::before {
+                    content: "";
+                    width: 200px;
+                    height: 200px;
+                    position: absolute;
+                    background-color: rgba(177, 177, 177, 0.425);
+                    border-radius: 20px;
+                }
+            }
+            .memory-card-back {
+                transform: rotateY(-180deg);
+                background-color: white;
+                &::before {
+                    content: "";
+                    width: 200px;
+                    height: 200px;
+                    position: absolute;
+                    border-radius: 20px;
+                }
+            }
+            &.selected,
+            &.found {
+                .memory-card-back {
+                    background-image: none;
+                    box-shadow: inset -3px -2px 4px 3px #a5a5a5;
+                }
+            }
+            &.selected {
+                .memory-card-back {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+            &.found {
+                cursor: default;
+                .memory-card-back {
+                    &::before {
+                        display: block !important;
+                        background-color: rgba(128, 150, 131, 0.685);
+                    }
+                }
+            }
+        }
+    }
+}
