@@ -10,7 +10,7 @@ function App() {
   const shapes = useMemo(() => ["square", "triangle", "circle"], []);
 
   //[variable]: nombre de dupliqués par forme (par exemple 2, 3, 4... carrés ou triangles dans le jeu)
-  const duplicatesCount = 3;
+  const duplicatesCount = 2;
 
   //générer un tableau contenant les datas à afficher mais sans ordre aléatoire à partir de [shapes] et duplicatesCount
   const dataArray = useMemo(() => {

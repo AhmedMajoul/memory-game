@@ -137,6 +137,9 @@ const Board = ({ dataArray }) => {
                     </Col>
                 ))}
             </Row>
+            <Row>
+                <p className="title w-100 pt-5 text-end">By: Ahmed Majoul</p>
+            </Row>
         </>
     )
 }
